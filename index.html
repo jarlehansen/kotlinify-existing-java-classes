@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="images/kotlin-logo.png" data-background-size="10%" data-background-position="bottom 5% right 5%">
+					<h1>Kotlinify existing Java classes</h1>
+					<p>
+						<small>Jarle Hansen - <a href="mailto:jarle.hansen@systek.no">jarle.hansen@systek.no</a></small>
+					</p>
+				</section>
+				<section>
+					<h3>Extension functions</h3>
+					<ul>
+						<li>Extend a class with new functionality without having to inherit from the class or use design pattern</li>
+						<li>Calling the function as if it is part of the original class</li>
+						<li>Does not alter the bytecode of the targeted classes</li>
+					</ul>
+				</section>
+				<section>
+						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
+								fun toSnakeCase(s: String) = s.replace(" ", "_")
+								toSnakeCase("Hello world")
+						</code></pre>
+				</section>
+				<section>
+						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
+								fun String.toSnakeCase() = this.replace(" ", "_")
+								"Hello world".toSnakeCase()
+						</code></pre>
+				</section>
+				<section>
+					<h3>From Java</h3>
+					<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
+								String helloWorld = SnakeCaseKt.toSnakeCase("Hello world");
+					</code></pre>
+				</section>
+				<section>
+					<img src="images/mockwebserver-github.png" />
+				</section>
+
+				<section>Slide 2</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
