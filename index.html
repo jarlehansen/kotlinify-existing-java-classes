@@ -83,14 +83,17 @@
 				</section>
 				<section>
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
-						fun MockWebServer.execute(
-							vararg responses: Any,
-							fn: () -> Unit
-						) : List< RecordedRequest?> {
-							responses.forEach { this.enqueueJson(body = it) }
-							fn()
-							return (1..responses.size).toList().map { this.takeRequest() }
-						}
+							fun MockWebServer.execute(
+								vararg responses: Any,
+								fn: () -> Unit
+							): List< RecordedRequest?> {
+								responses.forEach {
+									val json = jacksonObjectMapper().writeValueAsString(it)
+									this.enqueue(MockResponse().setBody(json))
+								}
+								fn()
+								return (1..responses.size).toList().map { this.takeRequest() }
+							}
 					</code></pre>
 				</section>
 				<section>
