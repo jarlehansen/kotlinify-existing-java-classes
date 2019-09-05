@@ -44,12 +44,11 @@
 								fun toSnakeCase(s: String) = s.replace(" ", "_")
 								toSnakeCase("Hello world")
 						</code></pre>
-				</section>
-				<section>
+						<br/>
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
-								fun String.toSnakeCase() = this.replace(" ", "_")
-								"Hello world".toSnakeCase()
-						</code></pre>
+							fun String.toSnakeCase() = this.replace(" ", "_")
+							"Hello world".toSnakeCase()
+					</code></pre>
 				</section>
 				<section>
 					<h3>From Java</h3>
@@ -59,6 +58,47 @@
 				</section>
 				<section>
 					<img src="images/mockwebserver-github.png" />
+				</section>
+				<section>
+					<h3>MockWebServer</h3>
+					<ul>
+						<li>From unit tests</li>
+						<li>Has a nice Java API (but perhaps a bit verbose)</li>
+						<li>Wanted to make it easier to use in Kotlin</li>
+					</ul>
+				</section>
+				<section>
+						<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
+							
+						</code></pre>
+				</section>
+				<section>
+					<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
+							private val server = MockWebServer()
+
+							@Test
+							fun `Update user settings`() {
+								val userSettings = UserSettings(listOf(ApplicationDeploymentFilter(filter)))
+								val request = server.execute(response) {
+									userSettingsService.updateUserSettings("token", userSettings)
+								}.first()
+				
+								assertThat(request.path)
+									.isEqualTo("/v1/users/annotations/applicationDeploymentFilters")
+								assertThat(request.method).isEqualTo(HttpMethod.PATCH.name)
+							}
+					</code></pre>
+				</section>
+				<section>
+					<h3>What we learned</h3>
+					<ul>
+						<li>Can create more readable code</li>
+						<li>Improve existing APIs (Kotlinify Java classes)</li>
+						<li>Keep the scope small</li>
+						<ul>
+							<li>Especially on basic types such as String</li>
+						</ul>
+					</ul>
 				</section>
 			</div>
 		</div>
