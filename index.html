@@ -69,7 +69,16 @@
 				</section>
 				<section>
 						<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
-							
+								Person person = new Person("Jarle");
+								String json = new ObjectMapper().writeValueAsString(person);
+				
+								MockWebServer server = new MockWebServer();
+								server.enqueue(new MockResponse().setResponseCode(200).setBody(json));
+								server.start(8000);
+				
+								RecordedRequest request = server.takeRequest();
+				
+								server.shutdown();
 						</code></pre>
 				</section>
 				<section>
