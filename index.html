@@ -99,17 +99,19 @@
 				<section>
 					<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							private val server = MockWebServer()
-
+						
 							@Test
-							fun `Update user settings`() {
-								val userSettings = UserSettings(listOf(ApplicationDeploymentFilter(filter)))
-								val request = server.execute(response) {
-									userSettingsService.updateUserSettings("token", userSettings)
-								}.first()
-				
-								assertThat(request.path)
-									.isEqualTo("/v1/users/annotations/applicationDeploymentFilters")
-								assertThat(request.method).isEqualTo(HttpMethod.PATCH.name)
+							fun `Get persons`() {
+								val person1 = Person("Ola")
+								val person2 = Person("Kari")
+						
+								val requests = server.execute(person1, person2) {
+									val persons = PersonService(server.port).getPersons()
+									assertThat(persons).hasSize(2)
+								}
+						
+								assertThat(requests).hasSize(2)
+								assertThat(requests.first()?.path).isNotNull().isEqualTo("/")
 							}
 					</code></pre>
 				</section>
