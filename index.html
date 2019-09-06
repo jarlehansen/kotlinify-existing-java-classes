@@ -25,7 +25,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-background="images/kotlin-logo.png" data-background-size="10%" data-background-position="bottom 5% right 5%">
+				<section data-background="images/systek-logo.png" data-background-size="20%" data-background-position="bottom 6% right 6%">
 					<h1>Kotlinify existing Java classes</h1>
 					<p>
 						<small>Jarle Hansen - <a href="mailto:jarle.hansen@systek.no">jarle.hansen@systek.no</a></small>
@@ -39,7 +39,7 @@
 						<li>Does not alter the bytecode of the targeted classes</li>
 					</ul>
 				</section>
-				<section>
+				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 								fun toSnakeCase(s: String) = s.replace(" ", "_")
 								toSnakeCase("Hello world")
@@ -50,7 +50,7 @@
 							"Hello world".toSnakeCase()
 					</code></pre>
 				</section>
-				<section>
+				<section data-background="images/java-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 					<h3>From Java</h3>
 					<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
 								String helloWorld = SnakeCaseKt.toSnakeCase("Hello world");
@@ -67,7 +67,7 @@
 						<li>Wanted to make it easier to use in Kotlin</li>
 					</ul>
 				</section>
-				<section>
+				<section data-background="images/java-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 						<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
 								Person person = new Person("Jarle");
 								String json = new ObjectMapper().writeValueAsString(person);
@@ -81,7 +81,7 @@
 								server.shutdown();
 						</code></pre>
 				</section>
-				<section>
+				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							fun MockWebServer.execute(
 								vararg responses: Any,
@@ -95,8 +95,11 @@
 								return (1..responses.size).toList().map { this.takeRequest() }
 							}
 					</code></pre>
+					<p>
+						<small>Simplified version. No error handling, timeouts etc.</small>
+					</p>
 				</section>
-				<section>
+				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 5% right 5%">
 					<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							private val server = MockWebServer()
 						
