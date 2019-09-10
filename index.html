@@ -181,7 +181,7 @@
 								}
 						
 								assertThat(requests).hasSize(2)
-								assertThat(requests.first()?.path).isNotNull().isEqualTo("/")
+								assertThat(requests.firscontrolst()?.path).isNotNull().isEqualTo("/")
 							}
 					</code></pre>
 					<aside class="notes">
@@ -231,7 +231,8 @@
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true }
 				],
-				transition: 'convex'
+				transition: 'convex',
+				controls: false
 			});
 		</script>
 	</body>
