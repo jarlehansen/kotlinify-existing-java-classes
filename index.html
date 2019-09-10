@@ -30,7 +30,14 @@
 					<p>
 						<small>Jarle Hansen - <a href="mailto:jarle.hansen@systek.no">jarle.hansen@systek.no</a></small>
 					</p>
+					<aside class="notes">
+						<ul>
+							<li>Kotlinify your existing Java classes using extension functions</li>
+							<li>What extension functions is, before going into one use case where we found it useful</li>
+						</ul>
+					</aside>
 				</section>
+
 				<section>
 					<h3>Extension functions</h3>
 					<ul>
@@ -38,27 +45,60 @@
 						<li style="padding-top: 10px;">Calling the function as if it is part of the original class</li>
 						<li style="padding-top: 10px;">Does not alter the bytecode of the targeted classes</li>
 					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Extend a class adding new functionality without having to use inheritence or a design pattern</li>
+							<li>Looks like it is part of that original class</li>
+							<li>Extension functions still need to be imported, so that is a difference from normal class functions</li>
+							<li>Does not alter the byte code</li>
+						</ul>
+					</aside>
 				</section>
+
 				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 								fun toSnakeCase(s: String) = s.replace(" ", "_")
 								toSnakeCase("Hello world")
 						</code></pre>
 						<br/>
+						<h3>Extension function</h3>
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							fun String.toSnakeCase() = this.replace(" ", "_")
 							"Hello world".toSnakeCase()
 					</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Traditional way of creating a function, takes a String as input</li>
+							<li>The syntax of writing extension functions is to write the class you want to extend and the the function name</li>
+							<li>This within the scope of the extension function is the actual instance you are extending</li>
+						</ul>
+					</aside>
 				</section>
+
 				<section data-background="images/java-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 					<h3>From Java</h3>
 					<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
 								String helloWorld = SnakeCaseKt.toSnakeCase("Hello world");
 					</code></pre>
+					<aside class="notes">
+							<ul>
+								<li>Possible to call Kotlin extension functions from Java</li>
+								<li>Static call, where you send in the String value</li>
+							</ul>
+						</aside>
 				</section>
+
 				<section>
 					<img src="images/mockwebserver-github.png" />
+					<aside class="notes">
+							<ul>
+								<li>Norwegian Tax Administration</li>
+								<li>Used MockWebServer in our tests</li>
+								<li>Functionality to test HTTP clients</li>
+							</ul>
+						</aside>
 				</section>
+
 				<section>
 					<h3>MockWebServer</h3>
 					<ul>
@@ -66,21 +106,41 @@
 						<li style="padding-top: 10px;">Has a nice Java API (but perhaps a bit verbose)</li>
 						<li style="padding-top: 10px;">Wanted to make it easier to use in Kotlin</li>
 					</ul>
+					<aside class="notes">
+							<ul>
+								<li>We use MockWebServer in our tests</li>
+								<li>Java API is a bit verbose</li>
+								<li>Wanted to make it more natural to use from Kotlin</li>
+							</ul>
+						</aside>
 				</section>
+
+
 				<section data-background="images/java-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 						<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
 								Person person = new Person("Jarle");
 								String json = new ObjectMapper().writeValueAsString(person);
 				
 								MockWebServer server = new MockWebServer();
-								server.enqueue(new MockResponse().setResponseCode(200).setBody(json));
+								server.enqueue(new MockResponse().setBody(json));
 								server.start(8000);
 				
+								// perform HTTP client request
+
 								RecordedRequest request = server.takeRequest();
 				
 								server.shutdown();
 						</code></pre>
+						<aside class="notes">
+							<ul>
+								<li>Shows an example of how the MockWebServer can be used in Java</li>
+								<li>MockWebServer basically provides a queue</li>
+								<li>Finally we can read the sent request from MockWebServer</li>
+								<li>We write our tests in Kotlin using JUnit 5</li>
+							</ul>
+						</aside>
 				</section>
+
 				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							fun MockWebServer.execute(
@@ -98,7 +158,15 @@
 					<p>
 						<small>Simplified version. No error handling, timeouts etc.</small>
 					</p>
+					<aside class="notes">
+						<ul>
+							<li>It takes in one or more responses, creates the json string for each DTO and the enqueues the responses</li>
+							<li>Perform the HTTP request inside the function input</li>
+							<li>Returns the recorded requests</li>
+						</ul>
+					</aside>
 				</section>
+
 				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 					<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							private val server = MockWebServer()
@@ -109,7 +177,7 @@
 								val person2 = Person("Kari")
 						
 								val requests = server.execute(person1, person2) {
-									val persons = PersonService(server.port).getPersons()
+									val persons = personService.getPersons()
 									assertThat(persons).hasSize(2)
 								}
 						
@@ -117,7 +185,15 @@
 								assertThat(requests.first()?.path).isNotNull().isEqualTo("/")
 							}
 					</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Shows how we can use the MockWebServer extension function</li>
+							<li>Send in two persons</li>
+							<li>Returns a list of recorded requests</li>
+						</ul>
+					</aside>
 				</section>
+
 				<section>
 					<h3>What we learned</h3>
 					<ul>
@@ -128,7 +204,15 @@
 							<li>Especially on basic types such as String</li>
 						</ul>
 					</ul>
+					<aside class="notes">
+						<ul>
+							<li>More readable code</li>
+							<li>Possible to improve existins Java APIs</li>
+							<li>Keep the scope small</li>
+						</ul>
+					</aside>
 				</section>
+
 				<section>
 						<img src="images/meetup.png" />
 				</section>
