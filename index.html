@@ -74,6 +74,19 @@
 					</aside>
 				</section>
 
+				<section data-background="images/java-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
+					<h3>From Java</h3>
+					<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
+								String helloWorld = SnakeCaseKt.toSnakeCase("Hello world");
+					</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Possible to call Kotlin extension functions from Java</li>
+							<li>Static call, where you send in the String value</li>
+						</ul>
+					</aside>
+				</section>
+
 				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
 					<h3>Used in Kotlin standard lib</h3>
 					<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
@@ -87,20 +100,14 @@
 									throw NoSuchElementException("List is empty.")
 								return this[0]
 							}
-						</code></pre>
-				</section>
-
-				<section data-background="images/java-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
-					<h3>From Java</h3>
-					<pre><code class="java" data-trim contenteditable style="font-size: 18px;">
-								String helloWorld = SnakeCaseKt.toSnakeCase("Hello world");
 					</code></pre>
+
 					<aside class="notes">
-							<ul>
-								<li>Possible to call Kotlin extension functions from Java</li>
-								<li>Static call, where you send in the String value</li>
-							</ul>
-						</aside>
+						<ul>
+							<li>Extension functions are used in the Kotlin standard lib</li>
+							<li>For example the functions added to List, such as first()</li>
+						</ul>
+					</aside>
 				</section>
 
 				<section>
