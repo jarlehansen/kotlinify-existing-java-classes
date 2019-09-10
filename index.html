@@ -25,7 +25,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-background="images/systek-logo.png" data-background-size="20%" data-background-position="bottom 6% right 6%">
+				<section data-background="images/systek-logo.png" data-background-size="25%" data-background-position="bottom 6% left 6%">
 					<h1>Kotlinify existing Java classes</h1>
 					<p>
 						<small>Jarle Hansen - <a href="mailto:jarle.hansen@systek.no">jarle.hansen@systek.no</a></small>
@@ -38,7 +38,7 @@
 					</aside>
 				</section>
 
-				<section>
+				<section data-background="images/systek-logo.png" data-background-size="12%" data-background-position="bottom 6% left 6%">
 					<h3>Extension functions</h3>
 					<ul>
 						<li style="padding-top: 10px;">Extend a class with new functionality without having to inherit from the class or use design pattern</li>
@@ -60,8 +60,7 @@
 								fun toSnakeCase(s: String) = s.replace(" ", "_")
 								toSnakeCase("Hello world")
 						</code></pre>
-						<br/>
-						<h3>Extension function</h3>
+						<img width="70" style="border: 0;" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							fun String.toSnakeCase() = this.replace(" ", "_")
 							"Hello world".toSnakeCase()
@@ -99,7 +98,7 @@
 						</aside>
 				</section>
 
-				<section>
+				<section data-background="images/systek-logo.png" data-background-size="12%" data-background-position="bottom 6% left 6%">
 					<h3>MockWebServer</h3>
 					<ul>
 						<li style="padding-top: 10px;">From unit tests</li>
@@ -177,7 +176,7 @@
 								val person2 = Person("Kari")
 						
 								val requests = server.execute(person1, person2) {
-									val persons = personService.getPersons()
+									val persons = personService.persons() // Sends the request
 									assertThat(persons).hasSize(2)
 								}
 						
@@ -194,7 +193,7 @@
 					</aside>
 				</section>
 
-				<section>
+				<section data-background="images/systek-logo.png" data-background-size="12%" data-background-position="bottom 6% left 6%">
 					<h3>What we learned</h3>
 					<ul>
 						<li style="padding-top: 10px;">Can create more readable code</li>
@@ -232,7 +231,7 @@
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true }
 				],
-				transition: 'concave'
+				transition: 'convex'
 			});
 		</script>
 	</body>
