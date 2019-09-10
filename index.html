@@ -64,7 +64,7 @@
 						<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
 							fun String.toSnakeCase() = this.replace(" ", "_")
 							"Hello world".toSnakeCase()
-					</code></pre>
+						</code></pre>
 					<aside class="notes">
 						<ul>
 							<li>Traditional way of creating a function, takes a String as input</li>
@@ -72,6 +72,22 @@
 							<li>This within the scope of the extension function is the actual instance you are extending</li>
 						</ul>
 					</aside>
+				</section>
+
+				<section data-background="images/kotlin-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
+					<h3>Used in Kotlin standard lib</h3>
+					<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
+					val values = listOf("a", "b", "c")
+					val firstValue = values.first()
+					</code></pre>
+					<br/>
+					<pre><code class="kotlin" data-trim contenteditable style="font-size: 18px;">
+							public fun < T> List< T>.first(): T {
+								if (isEmpty())
+									throw NoSuchElementException("List is empty.")
+								return this[0]
+							}
+						</code></pre>
 				</section>
 
 				<section data-background="images/java-logo.png" data-background-size="8%" data-background-position="bottom 6% right 6%">
